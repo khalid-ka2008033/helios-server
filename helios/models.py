@@ -17,10 +17,10 @@ import unicodecsv
 from django.conf import settings
 from django.db import models, transaction
 from validate_email import validate_email
-
+# ALL BELOW HAD from helios 
 from helios import datatypes
 from helios import utils
-from helios.datatypes.djangofield import LDObjectField
+from .datatypes.djangofield import LDObjectField
 # useful stuff in helios_auth
 from helios_auth.jsonfield import JSONField
 from helios_auth.models import User, AUTH_SYSTEMS
@@ -101,8 +101,10 @@ class Election(HeliosModel):
   # dates for the election steps, as scheduled
   # these are always UTC
   registration_starts_at = models.DateTimeField(auto_now_add=False, default=None, null=True)
-  voting_starts_at = models.DateTimeField(auto_now_add=False, default=None, null=True)
-  voting_ends_at = models.DateTimeField(auto_now_add=False, default=None, null=True)
+  voting_starts_at = models.DateTimeField(null=True, blank=True)
+  voting_ends_at = models.DateTimeField(null=True, blank=True)
+  
+
 
   # if this is non-null, then a complaint period, where people can cast a quarantined ballot.
   # we do NOT call this a "provisional" ballot, since provisional implies that the voter has not
