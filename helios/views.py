@@ -768,6 +768,15 @@ def one_election_cast_done(request, election):
     # with a site-wide voter. Definitely remove current_voter
     # checking that voter.user != None is needed because voter.user may now be None if voter is password only
     if voter.user == user and voter.user is not None:
+      # logout = settings.LOGOUT_ON_CONFIRMATION
+      print("==========================")
+      voter.vote_hash = vote_hash
+      voter.vote = votes[0].vote
+      print("voter votes[0]: ", votes[0])
+      print("voter.vote: ", votes[0].vote)
+      print("voter.vote_hash: ", voter.vote_hash)
+      print("==========================")
+      voter.save()
       logout = settings.LOGOUT_ON_CONFIRMATION
     else:
       logout = False
